@@ -1,0 +1,3 @@
+class MonsterCharacter < Character
+
+end 

@@ -14,4 +14,4 @@ Tests
 
 Playing The Game
  
-  1. run 'ruby app/run.rb' in the root directory
+1. run 'ruby app/run.rb' in the root directory
