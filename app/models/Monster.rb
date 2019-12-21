@@ -1,3 +1,4 @@
-class Monster < Character
+
+class Monster < ActiveRecord::Base
 
 end 
