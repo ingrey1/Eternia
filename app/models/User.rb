@@ -1,6 +1,3 @@
 class User < ActiveRecord::Base
-
-    has_many :game, dependent: :destroy
-    
-
-end 
+  has_many :games, dependent: :destroy
+end
