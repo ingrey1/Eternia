@@ -10,7 +10,7 @@ rake.load_rakefile
 
 describe Game do
   before(:each) do
-    Rake::Task["db:migrate"].invoke({ VERSION: 0 })
+    Rake::Task["db:migrate"].invoke(:VERSION, 0)
     #Rake::Task["db:migrate"].invoke
 
   end
