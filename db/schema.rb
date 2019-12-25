@@ -14,6 +14,13 @@ ActiveRecord::Schema.define(version: 3) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
+    t.integer "health"
+    t.integer "mana"
+    t.integer "strength"
+    t.integer "dexterity"
+    t.integer "wisdom"
+    t.integer "intelligence"
+    t.integer "charisma"
     t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,17 +1,13 @@
-require 'rake'
-require 'active_record'
-require 'yaml/store'
-require 'ostruct'
-require 'date'
+require "bundler/setup"
+require "sinatra/activerecord"
+require "ostruct"
+require "date"
+require "rake"
+require 'require_all'
+require_all 'app/models'
+
+Bundler.require 
 
 
-require 'bundler/setup'
-Bundler.require
-
-
-Dir.entries("app/models").select { |file_name| file_name.last(3) == ".rb" }.each { |f| require_relative "../app/models/" + f }
-
-ActiveRecord::Base.establish_connection(
-  :adapter => "sqlite3",
-  :database => "db/eternia.db"
-)
+connection_details = YAML::load(File.open('config/database.yml'))
+ActiveRecord::Base.establish_connection(connection_details)
