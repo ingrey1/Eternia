@@ -2,8 +2,12 @@ class CreateCharacters < ActiveRecord::Migration[5.2]
   def change
     create_table :characters do |t|
       t.string :name
-      t.integer :health
-      t.integer :mana
+      t.integer :level
+      t.integer :current_health
+      t.integer :max_health
+      t.integer :current_mana
+      t.integer :experience
+      t.integer :max_mana
       t.integer :strength
       t.integer :dexterity
       t.integer :wisdom

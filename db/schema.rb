@@ -14,8 +14,12 @@ ActiveRecord::Schema.define(version: 3) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
-    t.integer "health"
-    t.integer "mana"
+    t.integer "level"
+    t.integer "current_health"
+    t.integer "max_health"
+    t.integer "current_mana"
+    t.integer "experience"
+    t.integer "max_mana"
     t.integer "strength"
     t.integer "dexterity"
     t.integer "wisdom"
