@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 3) do
     t.integer "strength"
     t.integer "dexterity"
     t.integer "wisdom"
+    t.integer "constitution"
     t.integer "intelligence"
     t.integer "charisma"
     t.integer "game_id"

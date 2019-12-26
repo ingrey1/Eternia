@@ -11,6 +11,7 @@ class CreateCharacters < ActiveRecord::Migration[5.2]
       t.integer :strength
       t.integer :dexterity
       t.integer :wisdom
+      t.integer :constitution
       t.integer :intelligence
       t.integer :charisma
       t.belongs_to :game
