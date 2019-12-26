@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 6) do
+ActiveRecord::Schema.define(version: 7) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
@@ -27,9 +27,11 @@ ActiveRecord::Schema.define(version: 6) do
     t.integer "intelligence"
     t.integer "charisma"
     t.integer "game_id"
+    t.integer "zone_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_characters_on_game_id"
+    t.index ["zone_id"], name: "index_characters_on_zone_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -84,6 +86,14 @@ ActiveRecord::Schema.define(version: 6) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "zones", force: :cascade do |t|
+    t.string "name"
+    t.integer "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_zones_on_game_id"
   end
 
 end

@@ -15,6 +15,7 @@ class CreateCharacters < ActiveRecord::Migration[5.2]
       t.integer :intelligence
       t.integer :charisma
       t.belongs_to :game
+      t.belongs_to :zone
       t.timestamps
     end
   end
