@@ -3,6 +3,10 @@ class Encounter < ActiveRecord::Base
   belongs_to :monster
 
   def fight
+    puts "#{self.character.name} has encountered hostile #{self.monster.name}\n"
+
+    puts "Let the fight begin!\n"
+
     character_delay = 3 - (self.character.dexterity / 10.0)
     monster_delay = 3 - (self.character.dexterity / 10.0)
 
@@ -14,6 +18,8 @@ class Encounter < ActiveRecord::Base
     end
 
     if self.character.current_health > 0
+      self.character_win = true
+      puts "#{self.character.name} has slain #{self.monster.name}!"
       self.character.gain_experience(self.monster)
     else
       puts "You have died. Game Over"

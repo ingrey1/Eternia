@@ -25,7 +25,9 @@ class Character < ActiveRecord::Base
     puts "1. Regular Attack\n2. Choose an Ability"
     choice = gets.chomp
     if choice == "1"
-      self.calculate_damage("Regular Attack")
+      dmg = self.calculate_damage("Regular Attack")
+      puts "\n#{self.name} attacks #{monster.name} for #{dmg} points of damage"
+      monster.lose_health(dmg)
     end
   end
 

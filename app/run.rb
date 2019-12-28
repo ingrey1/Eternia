@@ -57,4 +57,9 @@ zaross.zone = dark_forest
 
 kobold1.zone = dark_forest
 
-binding.pry
+encounter1 = Encounter.create
+encounter1.character = zaross
+encounter1.monster = kobold1
+encounter1.fight
+
+#binding.pry
