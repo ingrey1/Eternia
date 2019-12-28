@@ -1,13 +1,33 @@
 class Character < ActiveRecord::Base
   belongs_to :game
   belongs_to :zone
-  
+
   #has_one :game_class
   has_one :inventory
   has_many :encounters
   has_many :monsters, through: :encounters
   has_many :items, through: :inventory
   #has_many :items, through: :equipment
+
+  def lose_health(damage)
+    self.current_health = self.current_health - damage
+  end
+
+  def calculate_damage(ability)
+    if ability.class == Ability
+      return ability.damage
+    else
+      return 1 + (self.strength / 5 * rand(5))
+    end
+  end
+
+  def attack(monster)
+    puts "1. Regular Attack\n2. Choose an Ability"
+    choice = gets.chomp
+    if choice == "1"
+      self.calculate_damage("Regular Attack")
+    end
+  end
 
   def level_up
     self.update_attribute(:level, self.level + 1)
