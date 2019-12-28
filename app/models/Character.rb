@@ -1,8 +1,11 @@
 class Character < ActiveRecord::Base
   belongs_to :game
   belongs_to :zone
+  
   #has_one :game_class
   has_one :inventory
+  has_many :encounters
+  has_many :monsters, through: :encounters
   has_many :items, through: :inventory
   #has_many :items, through: :equipment
 
