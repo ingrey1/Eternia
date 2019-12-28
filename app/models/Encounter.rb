@@ -20,11 +20,11 @@ class Encounter < ActiveRecord::Base
       if player_attack == "auto attack"
         # timer attacks
 
-        p_timer = Concurrent::TimerTask.new(execution_interval: 1, timeout_interval: 1) do |task|
+        p_timer = Concurrent::TimerTask.new(execution_interval: character_delay, timeout_interval: character_delay) do |task|
           self.character.attack(self.monster, true)
         end
 
-        m_timer = Concurrent::TimerTask.new(execution_interval: 1, timeout_interval: 1) do |task|
+        m_timer = Concurrent::TimerTask.new(execution_interval: monster_delay, timeout_interval: monster_delay) do |task|
           self.monster.attack(self.character)
         end
         p_timer.execute
