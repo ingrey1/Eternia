@@ -3,6 +3,7 @@ require "sinatra/activerecord"
 require "ostruct"
 require "date"
 require "rake"
+require "concurrent"
 require 'require_all'
 require_all 'app/models'
 

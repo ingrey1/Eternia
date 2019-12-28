@@ -8,11 +8,17 @@ class Monster < ActiveRecord::Base
     self.current_health = self.current_health - damage 
  end 
 
+  def set_exp
+    self.experience = self.level * 5 + rand(10)
+  end 
+
   def calculate_damage
-     1 + (self.strength / 5 * rand(5) )
+     (1 + (self.strength / 5.0 * rand(5) )).round(1)
   end 
 
   def attack(player)
-    player.lose_health(self.calculate_damage)
+    dmg = self.calculate_damage
+    player.lose_health(dmg)
+    puts "#{self.name} attacks #{player.name} for #{dmg} points of damage\n"
   end
 end

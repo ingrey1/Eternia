@@ -1,0 +1,4 @@
+class MonsterGenerator
+
+
+end 

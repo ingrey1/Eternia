@@ -22,6 +22,7 @@ kobold1 = Monster.create({
   intelligence: 1,
   charisma: 1,
 })
+kobold1.set_exp
 
 zaross_start_data = {
   name: "zaross",

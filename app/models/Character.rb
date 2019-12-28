@@ -4,7 +4,7 @@ class Character < ActiveRecord::Base
 
   #has_one :game_class
   has_one :inventory
-  has_many :encounters
+  has_many :encounters, dependent: :destroy
   has_many :monsters, through: :encounters
   has_many :items, through: :inventory
   #has_many :items, through: :equipment
@@ -17,17 +17,28 @@ class Character < ActiveRecord::Base
     if ability.class == Ability
       return ability.damage
     else
-      return 1 + (self.strength / 5 * rand(5))
+      return (1 + (self.strength / 3.0 * rand(5))).round(1)
     end
   end
 
-  def attack(monster)
-    puts "1. Regular Attack\n2. Choose an Ability"
+  def execute_attack(monster, ability)
+    if ability == "auto attack" || ability == "regular attack"
+      dmg = self.calculate_damage("regular Attack")
+    end
+    puts "\n#{self.name} attacks #{monster.name} for #{dmg} points of damage\n"
+    monster.lose_health(dmg)
+    ability
+  end
+
+  def attack(monster, auto_status)
+    return execute_attack(monster, "auto attack") if auto_status
+
+    puts "\n1. Regular Attack\n2. Auto Attack\n3. Choose an Ability"
     choice = gets.chomp
     if choice == "1"
-      dmg = self.calculate_damage("Regular Attack")
-      puts "\n#{self.name} attacks #{monster.name} for #{dmg} points of damage"
-      monster.lose_health(dmg)
+      execute_attack(monster, "regular attack")
+    elsif choice == "2"
+      execute_attack(monster, "auto attack")
     end
   end
 
@@ -47,7 +58,7 @@ class Character < ActiveRecord::Base
   end
 
   def gain_experience(monster)
-    puts "You gain #{monster.experience} experience from monster.name"
+    puts "#{self.name} gains #{monster.experience} experience from #{monster.name}"
     self.experience = self.experience + monster.experience
     level_check = self.exp_to_next_level - self.experience
 
