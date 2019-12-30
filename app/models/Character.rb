@@ -24,31 +24,54 @@ class Character < ActiveRecord::Base
   def loot_gold(monster)
     self.gold = self.gold + monster.gold
     puts "#{self.name} has looted #{monster.gold} from #{monster.name}."
-    monster.gold = 0 
+    monster.gold = 0
   end
 
   def lucky_loot_status
-     num = rand(1..100)
-     if num >= 90
-       return 3
-     elsif num >= 50
-       return 2
-     elsif num >= 15
-       return 1
-     else
-       return 0
-     end  
-  end 
-  
-  def loot_items(monster)
+    num = rand(1..100)
+    if num >= 90
+      return 3
+    elsif num >= 50
+      return 2
+    elsif num >= 15
+      return 1
+    else
+      return 0
+    end
+  end
 
+  def set_loot_associations(monster, looted_items)
+    looted_items.each do |item|
+      monster.inventory.items.pop(item)
+      monster.inventory.save
+      item.monster = nil
+      item.character = self
+      item.save
+      character.inventory.items << item
+      character.save
+    end
+  end
+
+  def loot_items(monster)
     if monster.inventory.items.empty?
       puts "The monster didn't drop any items"
     else
-       
-    end 
-    
-  end 
+      max_items_num = lucky_loot_status
+      if max_items_num == 0
+        puts "The monster didn't drop any items"
+        return
+      end
+      looted_items = []
+      # get the items that will be looted by player
+      max_items_num.times do
+        if !monster.inventory.items.empty?
+          looted_items << monster.inventory.items.last
+        end
+        # unassociate item and monster; associate item and character
+        set_loot_associations(monster, looted_items)
+      end
+    end
+  end
 
   def execute_attack(monster, ability)
     if ability == "auto attack" || ability == "regular attack"
