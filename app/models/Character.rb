@@ -21,9 +21,33 @@ class Character < ActiveRecord::Base
     end
   end
 
-  def loot(monster)
+  def loot_gold(monster)
     self.gold = self.gold + monster.gold
+    puts "#{self.name} has looted #{monster.gold} from #{monster.name}."
     monster.gold = 0 
+  end
+
+  def lucky_loot_status
+     num = rand(1..100)
+     if num >= 90
+       return 3
+     elsif num >= 50
+       return 2
+     elsif num >= 15
+       return 1
+     else
+       return 0
+     end  
+  end 
+  
+  def loot_items(monster)
+
+    if monster.inventory.items.empty?
+      puts "The monster didn't drop any items"
+    else
+       
+    end 
+    
   end 
 
   def execute_attack(monster, ability)

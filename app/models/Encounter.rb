@@ -44,6 +44,7 @@ class Encounter < ActiveRecord::Base
       self.character_win = true
       puts "#{self.character.name} has slain #{self.monster.name}!"
       self.character.gain_experience(self.monster)
+      self.character.loot_gold(self.monster)
     else
       puts "You have died. Game Over"
       self.character.game.status = "game over"
