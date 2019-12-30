@@ -21,8 +21,11 @@ kobold1 = Monster.create({
   constitution: 1,
   intelligence: 1,
   charisma: 1,
+  gold: 0
 })
 kobold1.set_exp
+kobold1.set_gold
+
 
 zaross_start_data = {
   name: "zaross",
@@ -38,6 +41,7 @@ zaross_start_data = {
   constitution: 1,
   intelligence: 1,
   charisma: 1,
+  gold: 0
 }
 
 zaross = Character.create(zaross_start_data)

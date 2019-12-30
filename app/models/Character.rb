@@ -21,6 +21,11 @@ class Character < ActiveRecord::Base
     end
   end
 
+  def loot(monster)
+    self.gold = self.gold + monster.gold
+    monster.gold = 0 
+  end 
+
   def execute_attack(monster, ability)
     if ability == "auto attack" || ability == "regular attack"
       dmg = self.calculate_damage("regular Attack")
